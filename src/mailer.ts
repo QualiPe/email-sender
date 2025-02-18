@@ -1,4 +1,7 @@
 import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export async function sendEmail(recipient: string, emailBody: string) {
 
@@ -7,8 +10,8 @@ export async function sendEmail(recipient: string, emailBody: string) {
     port: 465,
     secure: true,
     auth: {
-      user: '',
-      pass: ''
+      user: process.env.USER_EMAIL,
+      pass: process.env.USER_PASSWORD,
     }
   });
 
