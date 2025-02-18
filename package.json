@@ -1,28 +1,29 @@
 {
   "name": "email-sender",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.0.1",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/QualiPe/email-sender.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/QualiPe/email-sender/issues"
+    "lint": "eslint 'src/**/*.ts'",
+    "lint:fix": "eslint 'src/**/*.ts' --fix",
+    "start": "ts-node src/index.ts"
   },
   "homepage": "https://github.com/QualiPe/email-sender#readme",
   "description": "",
   "dependencies": {
+    "@nestjs/common": "^11.0.10",
     "@types/nodemailer": "^6.4.17",
     "dotenv": "^16.4.7",
     "nodemailer": "^6.10.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@typescript-eslint/eslint-plugin": "^8.24.1",
+    "@typescript-eslint/parser": "^8.24.1",
+    "eslint": "^9.20.1",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "prettier": "^3.5.1"
   }
 }

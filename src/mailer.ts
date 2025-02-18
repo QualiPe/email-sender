@@ -3,8 +3,11 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export async function sendEmail(recipient: string, emailBody: string) {
-
+export async function sendEmail(
+  recipient: string,
+  subject: string,
+  emailBody: string,
+) {
   const transporter = nodemailer.createTransport({
     host: 'smtp.mail.ru',
     port: 465,
@@ -12,13 +15,13 @@ export async function sendEmail(recipient: string, emailBody: string) {
     auth: {
       user: process.env.USER_EMAIL,
       pass: process.env.USER_PASSWORD,
-    }
+    },
   });
 
   const mailOptions = {
-    from: 'Test operator',
+    from: `${process.env.USER_NAME} <${process.env.USER_EMAIL}>`,
     to: recipient,
-    subject: 'Auto send',
+    subject,
     text: emailBody,
   };
 
