@@ -1,0 +1,27 @@
+{
+  "name": "email-sender",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QualiPe/email-sender.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/QualiPe/email-sender/issues"
+  },
+  "homepage": "https://github.com/QualiPe/email-sender#readme",
+  "description": "",
+  "dependencies": {
+    "@types/nodemailer": "^6.4.17",
+    "nodemailer": "^6.10.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
