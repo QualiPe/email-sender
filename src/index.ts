@@ -55,7 +55,11 @@ async function main() {
       );
 
       await new Promise((resolve) => setTimeout(resolve, delay));
-      await sendEmail(recipient, subject, body);
+      try {
+        await sendEmail(recipient, subject, body);
+      } catch (error) {
+        logger.error(`Failed to send email to ${recipient}: ${error.message}`);
+      }
     }
 
     logger.debug('All letters are successfully sent!');
