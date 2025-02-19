@@ -2,6 +2,9 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { sendEmail } from './mailer';
 import { getRandomDelay } from './delay';
+import { Logger } from '@nestjs/common';
+
+const logger = new Logger('Main');
 
 function getEmailList(csvPath: string): string[] {
   const csvContent = fs.readFileSync(csvPath, 'utf-8');
@@ -23,7 +26,7 @@ function getRandomTemplate(emailTextsDir: string): {
 
   const randomIndex = Math.floor(Math.random() * templates.length);
   const chosenTemplateFile = templates[randomIndex];
-  console.log(`Selected template: ${chosenTemplateFile}`);
+  logger.debug(`Selected template: ${chosenTemplateFile}`);
 
   const templatePath = path.join(emailTextsDir, chosenTemplateFile);
   const templateContent = fs.readFileSync(templatePath, 'utf-8');
@@ -42,11 +45,12 @@ async function main() {
     const emailList = getEmailList(emailsCsvPath);
 
     const emailTextsDir = path.join(__dirname, '..', 'emailTexts');
-    const { subject, body } = getRandomTemplate(emailTextsDir);
 
     for (const recipient of emailList) {
+      const { subject, body } = getRandomTemplate(emailTextsDir);
+
       const delay = getRandomDelay(5, 15);
-      console.log(
+      logger.log(
         `Waiting ${delay / 1000} seconds before sending to ${recipient}...`,
       );
 
@@ -54,9 +58,9 @@ async function main() {
       await sendEmail(recipient, subject, body);
     }
 
-    console.log('All letters are succesfully sent!');
+    logger.debug('All letters are successfully sent!');
   } catch (error) {
-    console.error('Some error:', error);
+    logger.error('Some error:', error.stack);
   }
 }
 

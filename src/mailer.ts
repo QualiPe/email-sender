@@ -1,7 +1,9 @@
 import nodemailer from 'nodemailer';
+import { Logger } from '@nestjs/common';
 import dotenv from 'dotenv';
 
 dotenv.config();
+const logger = new Logger('Mailer');
 
 export async function sendEmail(
   recipient: string,
@@ -26,5 +28,5 @@ export async function sendEmail(
   };
 
   const info = await transporter.sendMail(mailOptions);
-  console.log(`Email sent to: ${recipient}, info: ${info.messageId}`);
+  logger.log(`Email sent => ${recipient}, info: ${info.messageId}`);
 }
