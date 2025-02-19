@@ -46,6 +46,8 @@ async function main() {
 
     const emailTextsDir = path.join(__dirname, '..', 'emailTexts');
 
+    const failedEmails: string[] = []
+
     for (const recipient of emailList) {
       const { subject, body } = getRandomTemplate(emailTextsDir);
 
@@ -59,7 +61,14 @@ async function main() {
         await sendEmail(recipient, subject, body);
       } catch (error) {
         logger.error(`Failed to send email to ${recipient}: ${error.message}`);
+        failedEmails.push(recipient);
       }
+    }
+
+    if (failedEmails.length > 0) {
+      const failedFilePath = path.join(__dirname, '..', 'failed-emails.txt');
+      fs.writeFileSync(failedFilePath, failedEmails.join('\n'), 'utf-8');
+      logger.warn(`Failed addresses were saved to: ${failedFilePath}`);
     }
 
     logger.debug('All letters are successfully sent!');
